@@ -35,12 +35,7 @@ export default class Main {
     }
 
     _createUser() {
-        this._camera = new THREE.PerspectiveCamera(
-            45, //Field of View Angle
-            window.innerWidth / window.innerHeight, //Aspect Ratio
-            0.1, //Clipping for things closer than this amount
-            1000 //Clipping for things farther than this amount
-        );
+        this._camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 10 );
         this._camera.position.setY(1.7); //Height of your eyes
         this._scene.add(this._camera);
     }
@@ -76,9 +71,12 @@ export default class Main {
         this._scene.add(this._shapes);
 
         //Add light to the scene
-        let light = new THREE.PointLight();
-        light.position.setY(2);
-        this._scene.add(light);
+       // let light = new THREE.PointLight();
+      //  light.position.setY(2);
+       // this._scene.add(light);
+        const light = new THREE.DirectionalLight( 0xffffff );
+        light.position.set( 1, 1, 1 ).normalize();
+        this._scene.add( light );
     }
 
     _addEventListeners() {
@@ -90,9 +88,9 @@ export default class Main {
     }
 
     _onResize () {
-        this._renderer.setSize(window.innerWidth, window.innerHeight);
         this._camera.aspect = window.innerWidth / window.innerHeight;
         this._camera.updateProjectionMatrix();
+        this._renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
     _update() {
