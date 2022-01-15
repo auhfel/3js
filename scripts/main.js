@@ -21,7 +21,9 @@ export default class Main {
 
     _createRenderer() {
         this._renderer = new THREE.WebGLRenderer({ antialias : true });
+        this._renderer.setPixelRatio( window.devicePixelRatio );
         this._renderer.setSize(window.innerWidth, window.innerHeight);
+        this._renderer.outputEncoding = THREE.sRGBEncoding;
         this._renderer.xr.enabled = true;
         this._container.appendChild(this._renderer.domElement);
         this._container.appendChild(VRButton.createButton(this._renderer));
